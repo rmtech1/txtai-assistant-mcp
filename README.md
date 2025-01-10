@@ -1,6 +1,19 @@
 # TxtAI Assistant MCP
 
-A Model Context Protocol (MCP) server implementation for semantic search and memory management using TxtAI. This server provides a robust API for storing, retrieving, and managing text-based memories with semantic search capabilities.
+A Model Context Protocol (MCP) server implementation for semantic search and memory management using [txtai](https://github.com/neuml/txtai). This server provides a robust API for storing, retrieving, and managing text-based memories with semantic search capabilities.
+
+## About txtai
+
+This project is built on top of [txtai](https://github.com/neuml/txtai), an excellent open-source AI-powered search engine created by [NeuML](https://github.com/neuml). txtai provides:
+
+- 🔍 All-in-one semantic search solution
+- 🧠 Neural search with transformers
+- 💡 Zero-shot text classification
+- 🔄 Text extraction and embeddings
+- 🌐 Multi-language support
+- 🚀 High performance and scalability
+
+We extend txtai's capabilities by integrating it with the Model Context Protocol (MCP), enabling AI assistants like Claude and Cline to leverage its powerful semantic search capabilities. Special thanks to the txtai team for creating such a powerful and flexible tool.
 
 ## Features
 
