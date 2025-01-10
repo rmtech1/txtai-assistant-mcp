@@ -11,6 +11,7 @@ A Model Context Protocol (MCP) server implementation for semantic search and mem
 - 🔄 Automatic data persistence
 - 📝 Comprehensive logging
 - 🔒 Configurable CORS settings
+- 🤖 Integration with Claude and Cline AI
 
 ## Prerequisites
 
@@ -56,6 +57,121 @@ LOG_LEVEL=DEBUG
 # Memory Configuration
 MAX_MEMORIES=0
 ```
+
+## Integration with Claude and Cline AI
+
+This TxtAI Assistant can be used as an MCP server with Claude and Cline AI to enhance their capabilities with semantic memory and search functionality.
+
+### Configuration for Claude
+
+To use this server with Claude, add it to Claude's MCP configuration file (typically located at `~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
+
+```json
+{
+  "mcpServers": {
+    "txtai-assistant": {
+      "command": "path/to/txtai-assistant-mcp/scripts/start.sh",
+      "env": {}
+    }
+  }
+}
+```
+
+### Configuration for Cline
+
+To use with Cline, add the server configuration to Cline's MCP settings file (typically located at `~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json`):
+
+```json
+{
+  "mcpServers": {
+    "txtai-assistant": {
+      "command": "path/to/txtai-assistant-mcp/scripts/start.sh",
+      "env": {}
+    }
+  }
+}
+```
+
+### Available MCP Tools
+
+Once configured, the following tools become available to Claude and Cline:
+
+1. `store_memory`: Store new memory content with metadata and tags
+```json
+{
+  "content": "Memory content to store",
+  "metadata": {
+    "source": "conversation",
+    "timestamp": "2023-01-01T00:00:00Z"
+  },
+  "tags": ["important", "context"],
+  "type": "conversation"
+}
+```
+
+2. `retrieve_memory`: Retrieve memories based on semantic search
+```json
+{
+  "query": "search query",
+  "n_results": 5
+}
+```
+
+3. `search_by_tag`: Search memories by tags
+```json
+{
+  "tags": ["important", "context"]
+}
+```
+
+4. `delete_memory`: Delete a specific memory by content hash
+```json
+{
+  "content_hash": "hash_value"
+}
+```
+
+5. `get_stats`: Get database statistics
+```json
+{}
+```
+
+6. `check_health`: Check database and embedding model health
+```json
+{}
+```
+
+### Usage Examples
+
+In Claude or Cline, you can use these tools through the MCP protocol:
+
+```python
+# Store a memory
+<use_mcp_tool>
+<server_name>txtai-assistant</server_name>
+<tool_name>store_memory</tool_name>
+<arguments>
+{
+  "content": "Important information to remember",
+  "tags": ["important"]
+}
+</arguments>
+</use_mcp_tool>
+
+# Retrieve memories
+<use_mcp_tool>
+<server_name>txtai-assistant</server_name>
+<tool_name>retrieve_memory</tool_name>
+<arguments>
+{
+  "query": "what was the important information?",
+  "n_results": 5
+}
+</arguments>
+</use_mcp_tool>
+```
+
+The AI will automatically use these tools to maintain context and retrieve relevant information during conversations.
 
 ## API Endpoints
 
