@@ -38,7 +38,7 @@ RUN git clone https://github.com/rmtech1/txtai-assistant-mcp . && \
     git checkout 06f4ecc6c0d18f2fc6d632903bba2dcc77eab71f
 
 # Make your start.sh executable
-RUN chmod +x ./scripts/start.sh
+RUN chmod +x ./scripts/dockerstart.sh
 
 # Build the frontend/backend if needed
 RUN pnpm install && pnpm run build
@@ -47,4 +47,4 @@ RUN pnpm install && pnpm run build
 RUN pip install --upgrade pip && pip install -r server/requirements.txt
 
 # Default CMD
-CMD ["bash", "./scripts/start.sh"]
+CMD ["bash", "./scripts/dockerstart.sh"]
