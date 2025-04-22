@@ -1,17 +1,25 @@
 #!/bin/bash
 
-# Go to the server directory
-cd "$(dirname "$0")/../server"
+# Get the project root from this script's location
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 
-# Install Python dependencies globally in the container
+echo "Starting txtai-assistant in Docker..."
+
+# Create necessary directories
+mkdir -p "$PROJECT_ROOT/logs"
+mkdir -p "$PROJECT_ROOT/data"
+
+# Install Python dependencies (no venv)
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r "$PROJECT_ROOT/server/requirements.txt"
 
-# Use a fallback .env if one isn't provided
-if [ ! -f "../.env" ]; then
-    echo "WARNING: .env not found, using template."
-    cp ../.env.template ../.env
+# Use .env.template if .env is missing
+if [ ! -f "$PROJECT_ROOT/.env" ]; then
+    echo "No .env file found — copying from template."
+    cp "$PROJECT_ROOT/.env.template" "$PROJECT_ROOT/.env"
 fi
 
-# Start the app
+# Launch the app
+cd "$PROJECT_ROOT/server"
 python main.py
