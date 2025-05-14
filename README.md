@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/rmtech1-txtai-assistant-mcp-badge.png)](https://mseep.ai/app/rmtech1-txtai-assistant-mcp)
+
 # TxtAI Assistant MCP
 
 A Model Context Protocol (MCP) server implementation for semantic search and memory management using [txtai](https://github.com/neuml/txtai). This server provides a robust API for storing, retrieving, and managing text-based memories with semantic search capabilities.
